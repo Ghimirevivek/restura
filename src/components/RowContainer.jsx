@@ -1,14 +1,30 @@
 import { motion } from 'framer-motion';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MdShoppingBasket } from 'react-icons/md';
 import NotFound from '../img/NotFound.svg';
+import { useStateValue } from '../context/StateProvider';
 
 const RowContainer = ({ flag, data, scroll }) => {
   const rowContainer = useRef();
+
+  const {
+    state: { cartItems },
+    dispatch,
+  } = useStateValue();
+  const [items, setItems] = useState(cartItems);
+  const addToCart = () => {
+    dispatch({
+      type: 'SET_CART_ITEMS',
+      cartItems: items,
+    });
+    localStorage.setItem('cartItems', JSON.stringify(items));
+  };
+  useEffect(() => {
+    addToCart();
+  }, [items]);
+
   useEffect(() => {
     rowContainer.current.scrollLeft += scroll;
-    // console.log(rowContainer.current.scrollLeft);
-    // console.log(scroll);
   }, [scroll]);
   return (
     <div
@@ -19,7 +35,7 @@ const RowContainer = ({ flag, data, scroll }) => {
           : 'overflow-x-hidden flex-wrap justify-center'
       }`}
     >
-      {data.length > 0 ? (
+      {data && data.length > 0 ? (
         data.map((item) => (
           <div
             key={item.id}
@@ -35,6 +51,7 @@ const RowContainer = ({ flag, data, scroll }) => {
               <motion.div
                 whileTap={{ scale: 0.75 }}
                 className='w-8 h-8 rounded-full bg-red-600 flex items-center justify-center'
+                onClick={() => setItems([...cartItems, item])}
               >
                 <MdShoppingBasket className='text-white text-lg cursor-pointer' />
               </motion.div>

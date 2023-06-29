@@ -4,6 +4,10 @@ const Reducer = (state, action) => {
       return { ...state, user: action.user };
     case 'SET_FOOD_ITEMS':
       return { ...state, foodItems: action.foodItems };
+    case 'SET_CART_SHOW':
+      return { ...state, cartShow: action.cartShow };
+    case 'SET_CART_ITEMS':
+      return { ...state, cartItems: action.cartItems };
     default:
       return state;
   }
