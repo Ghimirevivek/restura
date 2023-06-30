@@ -54,7 +54,7 @@ const Header = () => {
       <div className='hidden md:flex w-full h-full items-center justify-between'>
         <Link to={'/'} className='flex items-center gap-2'>
           <img src={Logo} alt='logo' className='w-8 object-cover' />
-          <p className='text-headingColor text-xl font-bold'>Foods</p>
+          <p className='text-headingColor text-xl font-bold'>City</p>
         </Link>
         <div className='flex items-center gap-8'>
           <motion.ul
@@ -154,7 +154,7 @@ const Header = () => {
         </div>
         <Link to={'/'} className='flex items-center gap-2'>
           <img src={Logo} alt='logo' className='w-8 object-cover' />
-          <p className='text-headingColor text-xl font-bold'>Resturant</p>
+          <p className='text-headingColor text-xl font-bold'>City</p>
         </Link>
         <div className='relative'>
           <motion.img
